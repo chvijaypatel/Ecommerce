@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}  
+  
+{% block content %}
+
+<!-- page-banner-area-start -->
+<div class="page-banner-area page-banner-height-2" data-background="{% static 'assets/img/banner/page-banner-4.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page-banner-content text-center">
+                    <h4 class="breadcrumb-title">My account</h4>
+                    <div class="breadcrumb-two">
+                        <nav>
+                           <nav class="breadcrumb-trail breadcrumbs">
+                              <ul class="breadcrumb-menu">
+                                 <li class="breadcrumb-trail">
+                                    <a href="{% url 'home' %}"><span>Home</span></a>
+                                 </li>
+                                 <li class="trail-item">
+                                    <span>My account</span>
+                                 </li>
+                              </ul>
+                           </nav> 
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-banner-area-end -->
+
+ <!-- account-area-start -->
+ <div class="account-area mt-70 mb-70">
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                     {{message}}
+                 <button type"button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                 </button>
+                 </div>
+                 {% endif %}
+             {% endfor %}
+         {% endif %}
+        {% if messages %}
+                       {% for message in messages %}
+                           {% if message.tags == 'error' %}
+                               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{message}}
+                            <button type"button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="basic-login mb-50">
+                    <h5>Login</h5>
+                    
+                    <form action="{% url 'handlelogin' %}" method="post">
+                        {% csrf_token %}
+                        <label for="name">Username or email address  <span>*</span></label>
+                        <input id="name" type="text" placeholder="Enter Username" name="username">
+                        <label for="pass">Password <span>*</span></label>
+                        <input id="pass" type="password" placeholder="Enter password..." name="password">
+                        <div class="login-action mb-10 fix">
+                            <span class="log-rem f-left">
+                               <input id="remember" type="checkbox">
+                               <label for="remember">Remember me</label>
+                            </span>
+                            <span class="forgot-login f-right">
+                               <a href="{% url 'password_reset' %}">Lost your password?</a>
+                            </span>
+                        </div>
+                        <button type="submit" class="tp-in-btn w-100">log in</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="basic-login">
+                    <h5>Register</h5>
+                    <form action="{% url 'handleregister' %}" method="post">
+                         {% csrf_token %}
+                        <label for="username">Username or email address  <span>*</span></label>
+                        <input id="username" type="text" placeholder="Enter Username" name="username">
+                        <label for="email-id">Email Address <span>*</span></label>
+                        <input id="email-id" type="text" placeholder="Email address..." name="email">
+                        <label for="userpass">Password <span>*</span></label>
+                        <input id="userpass" type="password" placeholder="Enter password..." name="password">
+                        <div class="login-action mb-10 fix">
+                            <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="#">privacy policy</a>.</p>
+                        </div>
+                        <button type="submit" class="tp-in-btn w-100">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- account-area-end -->
+
+
+{% endblock %}

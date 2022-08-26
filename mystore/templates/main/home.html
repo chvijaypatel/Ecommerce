@@ -1,0 +1,715 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load product_tags %}
+{% load cart_tag %} 
+<main>
+<!-- slider-area-start -->
+{% block content %}
+<div class="slider-area">
+    <div class="swiper-container slider__active">
+        <div class="slider-wrapper swiper-wrapper">
+            {% for i in sliders %}
+            <div class="single-slider swiper-slide slider-height d-flex align-items-center" data-background="{{i.image.url}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5">
+                            <div class="slider-content">
+                                <div class="slider-top-btn" data-animation="fadeInLeft" data-delay="1.5s">
+                                    <a href="{{i.link}}" class="st-btn b-radius">{{i.deal}}</a>
+                                </div>
+                                <h2 data-animation="fadeInLeft" data-delay="1.7s" class="pt-15 slider-title pb-5"> {{i.discount}}% OFF <br> {{i.brand_name}}</h2>
+                                <p class="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.9s">Discount {{i.discount}}% On Products & Free Shipping</p>
+                                <div class="slider-bottom-btn mt-75">
+                                    <a data-animation="fadeInUp" data-delay="1.15s" href="{{i.link}}" class="st-btn-b b-radius">Discover now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /single-slider -->
+            {% endfor %}
+            <div class="main-slider-paginations"></div>
+        </div>
+    </div>
+</div>
+<!-- slider-area-end -->
+
+<!-- features__area-start -->
+<section class="features__area pt-20">
+    <div class="container">
+        <div class="row row-cols-xxl-4 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 row-cols-1 gx-0">
+            <div class="col">
+                <div class="features__item d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <i class="fal fa-truck"></i>
+                    </div>
+                    <div class="features__content">
+                        <h6>FREE DELIVERY</h6>
+                        <p>For all orders over RS.500</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="features__item d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <i class="fal fa-money-check"></i>
+                    </div>
+                    <div class="features__content">
+                        <h6>SAFE PAYMENT</h6>
+                        <p>100% secure payment</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="features__item d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <i class="fal fa-comments-alt"></i>
+                    </div>
+                    <div class="features__content">
+                        <h6>24/7 HELP CENTER</h6>
+                        <p>Delicated 24/7 support</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="features__item features__item-last d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <i class="fad fa-user-headset"></i>
+                    </div>
+                    <div class="features__content">
+                        <h6>FRIENDLY SERVICES</h6>
+                        <p>30 day satisfaction guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- features__area-end -->
+
+ <!-- banner__area-start -->
+ <section class="banner__area pt-60 pb-25">
+    <div class="container">
+        <div class="row">
+            {% for i in banners1 %}
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="banner__item p-relative w-img mb-30">
+                    
+                    <div class="banner__img">
+                        <a href="{{i.link}}"><img src="{{i.image.url}}" alt=""></a>
+                    </div>
+                    <div class="banner__content">
+                        <h6><a href="{{i.link}}">{{i.quote}} <br> {{i.brand_name}}</a></h6>
+                        <p>Discount  {{i.discount}}% On Products</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- banner__area-end -->
+
+<!-- topsell__area-start -->
+<section class="topsell__area-1 pt-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section__head d-flex justify-content-between mb-10">
+                    <div class="section__title">
+                        <h5 class="st-titile-d">Top Deals Of The Day</h5>
+                    </div>
+                    <div class="offer-time">
+                        <span class="offer-title d-none d-sm-block">Hurry Up! Offer ends in:</span>
+                        <div class="countdown">
+                            {% for i in timers %}
+                            <div class="countdown-inner b-radius" data-countdown="" data-date="{{i.datetime}}">
+                                <ul class="text-center">
+                                    <li><span data-days=""></span> Days</li>
+                                    <li><span data-hours=""></span> Hours</li>
+                                    <li><span data-minutes=""></span> Mins</li>
+                                    <li><span data-seconds=""></span> Secs</li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="product-bs-slider">
+                <div class="product-slider swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {% for i in products %}
+                        <div class="product__item swiper-slide">
+                            <div class="product__thumb fix">
+                                <div class="product-image w-img">
+                                    <a href="{{i.get_absolute_url}}">
+                                        <img src="{{i.featured_image.url}}" style="height:271px; width:263px;" alt="">
+                                    </a>
+                                </div>
+                                <div class="product__offer">
+                                <span class="discount">-{{i.discount}}%</span>
+                                </div>
+                                <div class="product-action">
+                                    <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId-{{forloop.counter}}">
+                                        <i class="fal fa-eye"></i>
+                                        <i class="fal fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="icon-box icon-box-1">
+                                        <i class="fal fa-heart"></i>
+                                        <i class="fal fa-heart"></i>
+                                    </a>
+                                    <a href="#" class="icon-box icon-box-1">
+                                        <i class="fal fa-layer-group"></i>
+                                        <i class="fal fa-layer-group"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product__content">
+                                <h6><a href="{{i.get_absolute_url}}">{{i.product_name|truncatewords:10 }}</a></h6>
+                                <div class="rating mb-4">
+                                    <ul> 
+                                        <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    </ul>
+                                    <span>(01 review)</span>
+                                </div>
+                                <div class="price mb-10">
+                                    <span>₹{% cal_sellprice i.price i.discount %} &nbsp;<del>₹{{i.price}} </del></span>
+                                </div>
+                                <div class="progress mb-5">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: {% progress_bar i.total_quantity i.a_quantity %}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress-rate">
+                                    <span>Sold: {{i.a_quantity}}/{{i.total_quantity}}</span>
+                                </div>
+                            </div>
+                            <div class="product__add-cart text-center">
+                                <a href="{% url 'cart_add' i.id %}" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                Add to Cart
+                                </a>
+                            </div>
+                        </div>
+                       {% endfor %}
+                    </div>
+                </div>
+                <!-- If we need navigation buttons -->
+                <div class="bs-button bs-button-prev"><i class="fal fa-chevron-left"></i></div>
+                <div class="bs-button bs-button-next"><i class="fal fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- topsell__area-end -->
+<br><br>
+<!-- banner__area-start -->
+<section class="banner__area banner__area-d pb-10">
+    <div class="container">
+        <div class="row">
+            {% for i in banners2 %}
+            <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="banner__item p-relative w-img mb-30">
+                    <div class="banner__img">
+                        <a href="{{i.link}}"><img src="{{i.image.url}}" alt=""></a>
+                    </div>
+                    <div class="banner__content">
+                        <span>Bestseller Products</span>
+                        <h6><a href="{{i.link}}">{{i.quote}} & {{i.brand_name}}</a></h6>
+                        <p>Discount {{i.discount}}% Off, Top Quality Products</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+<!-- banner__area-end -->
+
+ <!-- topsell__area-start -->
+ <section class="topsell__area-2 pt-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section__head d-flex justify-content-between mb-10">
+                    <div class="section__title">
+                        <h5 class="st-titile">Top Selling Products</h5>
+                    </div>
+                    <div class="product__nav-tab"> 
+                        <ul class="nav nav-tabs" id="flast-sell-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link active" id="computer-tab" data-bs-toggle="tab" data-bs-target="#computer" type="button" role="tab" aria-controls="computer" aria-selected="false">computer</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="samsung-tab" data-bs-toggle="tab" data-bs-target="#samsung" type="button" role="tab" aria-selected="false">samsung</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="htc-tab" data-bs-toggle="tab" data-bs-target="#htc" type="button" role="tab" aria-selected="false">HTC</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="nokia-tab" data-bs-toggle="tab" data-bs-target="#nokia" type="button" role="tab" aria-selected="false">Nokia</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="cell-tab" data-bs-toggle="tab" data-bs-target="#cell" type="button" role="tab" aria-selected="true">Cell Phones</button>
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="tab-content" id="flast-sell-tabContent">
+                    <div class="tab-pane fade active show" id="computer" role="tabpanel" aria-labelledby="computer-tab">
+                        <div class="product-bs-slider-2">
+                            <div class="product-slider-2 swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="product__item swiper-slide">
+                                        <div class="product__thumb fix">
+                                            <div class="product-image w-img">
+                                                <a href="product-details.html">
+                                                    <img src="{% static 'assets/img/product/tp-1.jpg' %}" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product__offer">
+                                            <span class="discount">-15%</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__content">
+                                            <h6><a href="product-details.html">Epple iPad Pro 10.5-inch Cellular 64G</a></h6>
+                                            <div class="rating mb-5">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                                <span>(01 review)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span>$105-$110</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__add-cart text-center">
+                                            <button type="button" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                            Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="bs-button bs2-button-prev"><i class="fal fa-chevron-left"></i></div>
+                            <div class="bs-button bs2-button-next"><i class="fal fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="samsung" role="tabpanel" aria-labelledby="samsung-tab">
+                        <div class="product-bs-slider-2">
+                            <div class="product-slider-2 swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="product__item swiper-slide">
+                                        <div class="product__thumb fix">
+                                            <div class="product-image w-img">
+                                                <a href="product-details.html">
+                                                    <img src="{% static 'assets/img/product/tp-1.jpg' %}" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product__offer">
+                                            <span class="discount">-15%</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__content">
+                                            <h6><a href="product-details.html">Epple iPad Pro 10.5-inch Cellular 64G</a></h6>
+                                            <div class="rating mb-5">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                                <span>(01 review)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span>$105-$110</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__add-cart text-center">
+                                            <button type="button" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                            Add to Cart
+                                            </button>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <!-- If we need navigation buttons -->
+                            </div>
+                            <div class="bs-button bs2-button-prev"><i class="fal fa-chevron-left"></i></div>
+                            <div class="bs-button bs2-button-next"><i class="fal fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="htc" role="tabpanel" aria-labelledby="htc-tab">
+                        <div class="product-bs-slider-2">
+                            <div class="product-slider-2 swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="product__item swiper-slide">
+                                        <div class="product__thumb fix">
+                                            <div class="product-image w-img">
+                                                <a href="product-details.html">
+                                                    <img src="{% static 'assets/img/product/tp-4.jpg'%}" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__content">
+                                            <h6><a href="product-details.html">Wireless Bluetooth Over-Ear Headphones</a></h6>
+                                            <div class="rating mb-5">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                                <span>(01 review)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span>$100-$180</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__add-cart text-center">
+                                            <button type="button" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                            Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="bs-button bs2-button-prev"><i class="fal fa-chevron-left"></i></div>
+                            <div class="bs-button bs2-button-next"><i class="fal fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nokia" role="tabpanel" aria-labelledby="nokia-tab">
+                        <div class="product-bs-slider-2">
+                            <div class="product-slider-2 swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="product__item swiper-slide">
+                                        <div class="product__thumb fix">
+                                            <div class="product-image w-img">
+                                                <a href="product-details.html">
+                                                    <img src="{% static 'assets/img/product/tp-1.jpg' %}" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product__offer">
+                                            <span class="discount">-15%</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__content">
+                                            <h6><a href="product-details.html">Epple iPad Pro 10.5-inch Cellular 64G</a></h6>
+                                            <div class="rating mb-5">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                                <span>(01 review)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span>$105-$110</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__add-cart text-center">
+                                            <button type="button" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                            Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="bs-button bs2-button-prev"><i class="fal fa-chevron-left"></i></div>
+                            <div class="bs-button bs2-button-next"><i class="fal fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="cell" role="tabpanel" aria-labelledby="cell-tab">
+                        <div class="product-bs-slider-2">
+                            <div class="product-slider-2 swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="product__item swiper-slide">
+                                        <div class="product__thumb fix">
+                                            <div class="product-image w-img">
+                                                <a href="product-details.html">
+                                                    <img src="{% static 'assets/img/product/tp-1.jpg' %}" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product__offer">
+                                            <span class="discount">-15%</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__content">
+                                            <h6><a href="product-details.html">Epple iPad Pro 10.5-inch Cellular 64G</a></h6>
+                                            <div class="rating mb-5">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                                <span>(01 review)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span>$105-$110</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__add-cart text-center">
+                                            <button type="button" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                            Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- If we need navigation buttons -->
+                            <div class="bs-button bs2-button-prev"><i class="fal fa-chevron-left"></i></div>
+                            <div class="bs-button bs2-button-next"><i class="fal fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- topsell__area-end -->
+
+<br></br>
+
+<!-- brand-area-start -->
+        <section class="brand-area brand-area-d">
+            <div class="container">
+                <div class="brand-slider swiper-container pt-50 pb-45">
+                    <div class="swiper-wrapper">
+                        <div class="brand-item w-img swiper-slide">
+                            <a href="#"><img src="{% static 'assets/img/brand/brand-1.jpg' %}" alt="brand"></a>
+                        </div>
+                        <div class="brand-item w-img swiper-slide">
+                            <a href="#"><img src="{% static 'assets/img/brand/brand-2.jpg' %}" alt="brand"></a>
+                        </div>
+                        <div class="brand-item w-img swiper-slide">
+                            <a href="#"><img src="{% static 'assets/img/brand/brand-3.jpg' %}" alt="brand"></a>
+                        </div>
+                        <div class="brand-item w-img swiper-slide">
+                            <a href="#"><img src="{% static 'assets/img/brand/brand-4.jpg' %}" alt="brand"></a>
+                        </div>
+                        <div class="brand-item w-img swiper-slide">
+                            <a href="#"><img src="{% static 'assets/img/brand/brand-5.jpg' %}" alt="brand"></a>
+                        </div>
+                        <div class="brand-item w-img swiper-slide">
+                            <a href="#"><img src="{% static 'assets/img/brand/brand-6.jpg' %}" alt="brand"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- brand-area-end -->
+
+
+
+
+
+<!-- shop modal start -->
+{% for i in products %}
+<div class="modal fade" id="productModalId-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered product__modal" role="document">
+        <div class="modal-content">
+            <div class="product__modal-wrapper p-relative">
+                <div class="product__modal-close p-absolute">
+                    <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+                </div>
+                <div class="product__modal-inner">
+                    <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product__modal-box">
+                            <div class="tab-content" id="modalTabContent">
+                                <div class="tab-pane fade show active" id="nav1" role="tabpanel" aria-labelledby="nav1-tab">
+                                    <div class="product__modal-img w-img">
+                                        <img src="{{i.featured_image.url}}" alt="">
+                                    </div>
+                                </div>                                
+                                {% for image in i.product_image_set.all %}
+                                <div class="tab-pane fade show" id="nav{{image.id}}" role="tabpanel" aria-labelledby="nav{{image.id}}-tab">
+                                    <div class="product__modal-img w-img">
+                                        <img src="{{image.image.url}}" alt="">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                </div>
+                            <ul class="nav nav-tabs" id="modalTab" role="tablist">
+                                {% for image in i.product_image_set.all %}
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="nav{{image.id}}-tab" data-bs-toggle="tab" data-bs-target="#nav{{image.id}}" type="button" role="tab" aria-controls="nav{{image.id}}" aria-selected="true">
+                                        <img src="{{image.image.url}}" alt="" style="width:85px;height:85px;">
+                                    </button>
+                                </li>
+                                {% endfor %}
+                                </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product__modal-content">
+                            <h4><a href="{{i.get_absolute_url}}">{{i.product_name}}</a></h4>
+                            <div class="product__review d-sm-flex">
+                                <div class="rating rating__shop mb-10 mr-30">
+                                <ul>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                </ul>
+                                </div>
+                                <div class="product__add-review mb-15">
+                                <span>01 review</span>
+                                </div>
+                            </div>
+                            <div class="product__price">
+                                <span>₹{% cal_sellprice i.price i.discount %} &nbsp;MRP:<del>₹{{i.price}} </del></span>
+                            </div>
+                            <div class="product__modal-des mt-20 mb-15">
+                                <ul>
+                                    <li><a href="{{i.get_absolute_url}}"><i class="fas fa-circle"></i> {{i.product_information|safe}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="product__stock mb-20">
+                                <span class="mr-10">Availability :</span>
+                                <span>{{i.a_quantity}} in stock</span>
+                            </div>
+                            <div class="product__modal-form">
+                                <form action="#">
+                                <div class="pro-quan-area d-lg-flex align-items-center">
+                                    <div class="product-quantity mr-20 mb-25">
+                                        <div class="cart-plus-minus p-relative"><input type="text" value="1" /></div>
+                                    </div>
+                                    <div class="pro-cart-btn mb-25">
+                                        <a href="{% url 'cart_add' i.id %}" class="cart-btn">Add to Cart</a>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="product__stock mb-30">
+                                <ul>
+                                    <li><a href="#">
+                                        <span class="sku mr-10">Model Name:</span>
+                                        <span>{{i.model_name}}</span></a>
+                                    </li>
+                                    <li><a href="#">
+                                        <span class="cat mr-10">Categories:</span>
+                                        <span>{{i.categories}}</span></a>
+                                    </li>
+                                    <li><a href="#">
+                                        <span class="tag mr-10">Tags:</span>
+                                        <span>{{i.tags}}</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- shop modal end -->
+
+
+
+
+</main>
+{% endblock %}
